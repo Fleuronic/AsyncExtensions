@@ -1,5 +1,6 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
+#if swift(>=5.5)
 @available(iOS 15, macOS 12, watchOS 8, tvOS 15, *)
 public extension Optional {
 	func asyncMap<U>(_ transform: (Wrapped) async throws -> U) async rethrows -> U? {
@@ -14,3 +15,4 @@ public extension Optional {
 		return try await transform(wrapped)
 	}
 }
+#endif
