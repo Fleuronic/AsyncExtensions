@@ -1,5 +1,7 @@
 .DS_Store
 /.build
+/.dependencies
+/.derivedData
 /.swiftpm
 /Packages
 /*.xcodeproj
