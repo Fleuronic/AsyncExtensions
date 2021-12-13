@@ -3,6 +3,7 @@
 
 import PackageDescription
 
+#if swift(>=5.5)
 let package = Package(
 	name: "AsyncOptional",
 	platforms: [
@@ -28,3 +29,26 @@ let package = Package(
 		)
 	]
 )
+#else
+let package = Package(
+	name: "AsyncOptional",
+	platforms: [
+		.iOS(.v13),
+		.macOS(.v11),
+		.watchOS(.v6),
+		.tvOS(.v13)
+	],
+	products: [
+		.library(
+			name: "AsyncOptional",
+			targets: ["AsyncOptional"]
+		)
+	],
+	targets: [
+		.target(
+			name: "AsyncOptional",
+			dependencies: []
+		)
+	]
+)
+#endif
