@@ -4,7 +4,7 @@
 import PackageDescription
 
 let package = Package(
-	name: "AsyncOptional",
+	name: "AsyncExtensions",
 	platforms: [
 		.iOS(.v13),
 		.macOS(.v10_15),
@@ -13,18 +13,18 @@ let package = Package(
 	],
 	products: [
 		.library(
-			name: "AsyncOptional",
-			targets: ["AsyncOptional"]
+			name: "AsyncExtensions",
+			targets: ["AsyncExtensions"]
 		)
 	],
 	targets: [
 		.target(
-			name: "AsyncOptional",
+			name: "AsyncExtensions",
 			dependencies: []
 		),
 		.testTarget(
-			name: "AsyncOptionalTests",
-			dependencies: ["AsyncOptional"]
+			name: "AsyncExtensionsTests",
+			dependencies: ["AsyncExtensions"]
 		)
 	]
 )
