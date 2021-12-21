@@ -3,6 +3,36 @@
 
 import PackageDescription
 
+#if os(Linux)
+let package = Package(
+	name: "AsyncExtensions",
+	platforms: [
+		.iOS(.v13),
+		.macOS(.v10_15),
+		.watchOS(.v6),
+		.tvOS(.v13)
+	],
+	products: [
+		.library(
+			name: "AsyncExtensions",
+			targets: ["AsyncExtensions"]
+		)
+	],
+	dependencies: [
+		.package(url: "https://github.com/cx-org/CombineX", from: "0.4.0")
+	],
+	targets: [
+		.target(
+			name: "AsyncExtensions",
+			dependencies: ["CombineX"]
+		),
+		.testTarget(
+			name: "AsyncExtensionsTests",
+			dependencies: ["AsyncExtensions"]
+		)
+	]
+)
+#else
 let package = Package(
 	name: "AsyncExtensions",
 	platforms: [
@@ -28,3 +58,4 @@ let package = Package(
 		)
 	]
 )
+#endif
