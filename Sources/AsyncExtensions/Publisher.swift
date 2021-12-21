@@ -5,13 +5,13 @@ import Combine
 #if swift(<5.5.2)
 @available(iOS 15, macOS 12, watchOS 8, tvOS 15, *)
 public extension Publisher {
-	var firstOutput: Output {
+	var singleValue: Output {
 		get async throws {
-			try await firstResult.get()
+			try await singleResult.get()
 		}
 	}
 
-	var firstResult: Result<Output, Failure> {
+	var singleResult: Result<Output, Failure> {
 		get async {
 			var cancellable: AnyCancellable?
 
@@ -30,7 +30,7 @@ public extension Publisher {
 
 @available(iOS 15, macOS 12, watchOS 8, tvOS 15, *)
 public extension Publisher where Failure == Never {
-	var firstOutput: Output {
+	var singleValue: Output {
 		get async {
 			var cancellable: AnyCancellable?
 
@@ -45,13 +45,13 @@ public extension Publisher where Failure == Never {
 }
 #else
 public extension Publisher {
-	var firstOutput: Output {
+	var singleValue: Output {
 		get async throws {
-			try await firstResult.get()
+			try await singleResult.get()
 		}
 	}
 
-	var firstResult: Result<Output, Failure> {
+	var singleResult: Result<Output, Failure> {
 		get async {
 			var cancellable: AnyCancellable?
 
@@ -69,7 +69,7 @@ public extension Publisher {
 }
 
 public extension Publisher where Failure == Never {
-	var firstOutput: Output {
+	var singleValue: Output {
 		get async {
 			var cancellable: AnyCancellable?
 
