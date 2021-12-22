@@ -32,6 +32,7 @@ public extension Publisher {
 	}
 }
 
+@available(iOS 15, macOS 12, watchOS 8, tvOS 15, *)
 public extension Publisher where Output == Never {
 	var completion: Subscribers.Completion<Failure> {
 		get async {
@@ -47,6 +48,7 @@ public extension Publisher where Output == Never {
 	}
 }
 
+@available(iOS 15, macOS 12, watchOS 8, tvOS 15, *)
 public extension Publisher where Failure == Never {
 	var singleValue: Output {
 		get async {
@@ -62,6 +64,7 @@ public extension Publisher where Failure == Never {
 	}
 }
 
+@available(iOS 15, macOS 12, watchOS 8, tvOS 15, *)
 public extension Publisher where Output == Never, Failure == Never {
 	var completion: Void {
 		get async {
