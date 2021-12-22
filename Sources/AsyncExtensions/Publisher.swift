@@ -32,7 +32,21 @@ public extension Publisher {
 	}
 }
 
-@available(iOS 15, macOS 12, watchOS 8, tvOS 15, *)
+public extension Publisher where Output == Never {
+	var completion: Subscribers.Completion<Failure> {
+		get async {
+			var cancellable: AnyCancellable?
+
+			return await withCheckedContinuation { continuation in
+				cancellable = sink { completion in
+					cancellable?.cancel()
+					continuation.resume(returning: completion)
+				} receiveValue: { _ in }
+			}
+		}
+	}
+}
+
 public extension Publisher where Failure == Never {
 	var singleValue: Output {
 		get async {
@@ -47,6 +61,22 @@ public extension Publisher where Failure == Never {
 		}
 	}
 }
+
+public extension Publisher where Output == Never, Failure == Never {
+	var completion: Void {
+		get async {
+			var cancellable: AnyCancellable?
+
+			return await withCheckedContinuation { continuation in
+				cancellable = sink { completion in
+					cancellable?.cancel()
+					continuation.resume(returning: ())
+				} receiveValue: { _ in }
+			}
+		}
+	}
+}
+
 #else
 public extension Publisher {
 	var singleValue: Output {
@@ -72,6 +102,21 @@ public extension Publisher {
 	}
 }
 
+public extension Publisher where Output == Never {
+	var completion: Subscribers.Completion<Failure> {
+		get async {
+			var cancellable: AnyCancellable?
+
+			return await withCheckedContinuation { continuation in
+				cancellable = sink { completion in
+					cancellable?.cancel()
+					continuation.resume(returning: completion)
+				} receiveValue: { _ in }
+			}
+		}
+	}
+}
+
 public extension Publisher where Failure == Never {
 	var singleValue: Output {
 		get async {
@@ -82,6 +127,21 @@ public extension Publisher where Failure == Never {
 					cancellable?.cancel()
 					continuation.resume(returning: value)
 				}
+			}
+		}
+	}
+}
+
+public extension Publisher where Output == Never, Failure == Never {
+	var completion: Void {
+		get async {
+			var cancellable: AnyCancellable?
+
+			return await withCheckedContinuation { continuation in
+				cancellable = sink { completion in
+					cancellable?.cancel()
+					continuation.resume(returning: ())
+				} receiveValue: { _ in }
 			}
 		}
 	}
