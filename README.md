@@ -1,3 +1,3 @@
 # AsyncExtensions
 
-Async versions of Swift’s map and flatMap APIs on Optional.
+Extension for async retrieval of values or results from a Combine publisher.
